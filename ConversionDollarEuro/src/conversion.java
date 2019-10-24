@@ -41,9 +41,9 @@ public class conversion {
 					againCheck = false;
 				}
 				else {
-					System.out.println("Eingabe nicht erkannt!"); // if the user`s input is wrong it asks again until "J","j" or "N","n" is detected
+					System.out.println("Eingabe nicht erkannt!!"); // if the user`s input is wrong it asks again until "J","j" or "N","n" is detected
 					againCheck = true;
-				}
+				}// github test
 			}
 		}
 	}
