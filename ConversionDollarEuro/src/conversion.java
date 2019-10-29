@@ -14,14 +14,14 @@ public class conversion {
 			if (mode == 1) { // if the user chooses types in 1 it converts the next number given by the user from EURO in Dollar
 				System.out.println("Betrag in Euro eingeben der in Dollar umgerechnet werden soll.");
 				Double inputEuro = in.nextDouble();
-				Double outDollar = (Double)(inputEuro * 1.11);
+				Double outDollar = (Double)(inputEuro * 1.34);
 				System.out.println(inputEuro + " Euro sind ca " + outDollar + " Dollar.");
 			}
 			else {
 				if(mode == 2) {  // if the user chooses types in 2 it converts the next number given by the user from Dollar in Euro
 					System.out.println("Betrag in Dollar eingeben der in Euro umgerechnet werden soll.");
 					Double inputDollar = in.nextDouble();
-					Double outEuro = (Double)(inputDollar / 1.11);
+					Double outEuro = (Double)(inputDollar / 1.34);
 					System.out.println(inputDollar + " Dollar sind ca " + outEuro + " Euro.");
 					
 				}
@@ -41,9 +41,9 @@ public class conversion {
 					againCheck = false;
 				}
 				else {
-					System.out.println("Eingabe nicht erkannt!!"); // if the user`s input is wrong it asks again until "J","j" or "N","n" is detected
+					System.out.println("Eingabe nicht erkannt!"); // if the user`s input is wrong it asks again until "J","j" or "N","n" is detected
 					againCheck = true;
-				}// github test
+				}
 			}
 		}
 	}
