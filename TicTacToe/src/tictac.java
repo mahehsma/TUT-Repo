@@ -8,6 +8,7 @@ public class tictac {
 	private static boolean pcOrPlayer= true; //true: PCs turn, false: Players turn
 	private static Scanner in = new Scanner(System.in);
 	private static int[] win = new int[2];
+	private static int fillToWin = 2;
 	
 	public static void main(String[] args) {	
 		resetgame();
@@ -24,7 +25,7 @@ public class tictac {
 	}
 	
 	public static void pcchoose() {
-		if ((grid[0]+grid[1]+grid[2])==2) {		//tries to check if 2 fields are used by PC
+		if ((grid[0]+grid[1]+grid[2])==fillToWin) {		//tries to check if 2 fields are used by PC
 			if(grid[0]==0) {
 				fieldPC=0;
 			}
@@ -35,7 +36,7 @@ public class tictac {
 				fieldPC=2;
 			}
 		}
-		else if ((grid[3]+grid[4]+grid[5])==2) {
+		else if ((grid[3]+grid[4]+grid[5])==fillToWin) {
 			if(grid[3]==0) {
 				fieldPC=3;
 			}
@@ -47,7 +48,7 @@ public class tictac {
 			}
 		}
 		
-		else if ((grid[6]+grid[7]+grid[8])==2) {
+		else if ((grid[6]+grid[7]+grid[8])==fillToWin) {
 			if(grid[6]==0) {
 				fieldPC=6;
 			}
@@ -58,7 +59,7 @@ public class tictac {
 				fieldPC=8;
 			}
 		}
-		else if ((grid[0]+grid[3]+grid[6])==2) {
+		else if ((grid[0]+grid[3]+grid[6])==fillToWin) {
 			if(grid[0]==0) {
 				fieldPC=0;
 			}
@@ -69,7 +70,7 @@ public class tictac {
 				fieldPC=6;
 			}
 		}
-		else if ((grid[1]+grid[4]+grid[7])==2) {
+		else if ((grid[1]+grid[4]+grid[7])==fillToWin) {
 			if(grid[1]==0) {
 				fieldPC=1;
 			}
@@ -80,7 +81,7 @@ public class tictac {
 				fieldPC=7;
 			}
 		}
-		else if ((grid[2]+grid[5]+grid[8])==2) {
+		else if ((grid[2]+grid[5]+grid[8])==fillToWin) {
 			if(grid[2]==0) {
 				fieldPC=2;
 			}
@@ -91,7 +92,7 @@ public class tictac {
 				fieldPC=8;
 			}
 		}
-		else if ((grid[0]+grid[4]+grid[8])==2) {
+		else if ((grid[0]+grid[4]+grid[8])==fillToWin) {
 			if(grid[0]==0) {
 				fieldPC=0;
 			}
@@ -102,7 +103,7 @@ public class tictac {
 				fieldPC=8;
 			}
 		}
-		else if ((grid[2]+grid[4]+grid[6])==2) {
+		else if ((grid[2]+grid[4]+grid[6])==fillToWin) {
 			if(grid[2]==0) {
 				fieldPC=2;
 			}
@@ -112,6 +113,10 @@ public class tictac {
 			else if(grid[6]==0) {
 				fieldPC=6;
 			}
+		}
+		else if(fillToWin==2) {
+			fillToWin=6;
+			pcchoose();
 		}
 		else {
 			System.out.println("PC setzt!");
@@ -164,7 +169,7 @@ public class tictac {
 		if(inputPlayer==1) {
 			pcOrPlayer = true;
 			System.out.println("PC beginnt!");
-			pcchoose();
+			//pcchoose();
 		}
 		else if(inputPlayer==2) {
 			pcOrPlayer = false;
@@ -183,10 +188,12 @@ public class tictac {
 		gridcreate();
 		for(int i=0; i <9; i++) {
 			if(pcOrPlayer == true) {
+				fillToWin=2;
 				pcchoose();
 			}
 			else {
-				System.out.println("Welches feld möchtest du wählen?(0-8)");				
+				System.out.println("Welches Feld möchtest du wählen?(0-8)");	
+				System.out.print(i);
 				do{
 					inputPlayer= in.nextInt();
 				} while(grid[inputPlayer] != 0);
@@ -197,6 +204,10 @@ public class tictac {
 			gridcreate();
 			wincheck();	
 			if(win[0]==1 || win[1]==1) {
+				break;
+			}
+			if(i==8 && win[0]==0 && win[1]==0) {
+				System.out.println("Unentschieden!");
 				break;
 			}
 		}
