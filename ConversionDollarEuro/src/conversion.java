@@ -11,14 +11,14 @@ public class conversion {
 			int mode = 0;
 			System.out.println("Bitte Möglichkeit Wählen: (1) Euro --> Dollar    (2) Dollar --> Euro"); 
 			mode = in.nextInt();
-			if (mode == 1) { // if the user chooses types in 1 it converts the next number given by the user from EURO in Dollar
+			if (mode == 1) { // if the user types in 1 it converts the next number given by the user from EURO in Dollar
 				System.out.println("Betrag in Euro eingeben der in Dollar umgerechnet werden soll.");
 				Double inputEuro = in.nextDouble();
 				Double outDollar = (Double)(inputEuro * 1.34);
 				System.out.println(inputEuro + " Euro sind ca " + outDollar + " Dollar.");
 			}
 			else {
-				if(mode == 2) {  // if the user chooses types in 2 it converts the next number given by the user from Dollar in Euro
+				if(mode == 2) {  // if the user types in 2 it converts the next number given by the user from Dollar in Euro
 					System.out.println("Betrag in Dollar eingeben der in Euro umgerechnet werden soll.");
 					Double inputDollar = in.nextDouble();
 					Double outEuro = (Double)(inputDollar / 1.34);
@@ -39,6 +39,7 @@ public class conversion {
 				else if ((inAgain.charAt(0) == 'N')|| (inAgain.charAt(0) == 'n')){ //every word beginning with "N" or "n" is accepted to rerun the program
 					again = false;
 					againCheck = false;
+					System.out.println("OK, bis zum nächsten Mal!");
 				}
 				else {
 					System.out.println("Eingabe nicht erkannt!"); // if the user`s input is wrong it asks again until "J","j" or "N","n" is detected
