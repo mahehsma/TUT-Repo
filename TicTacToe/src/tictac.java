@@ -3,8 +3,8 @@ import java.util.*;
 public class tictac {
 
 	private static int[] grid = new int[9]; // 0= unused, 1= used by PC, 3= used by Player
-	private static int fieldPC;			// where PC wants to place his next "X"
-	private static boolean win;			// if player or PC9 has won
+	private static int fieldPC; // where PC wants to place his next "X"
+	// private static boolean win; // if player or PC9 has won
 	private static int fillToWin = 2; // field to use in a row to win Player/PC
 
 	public static void main(String[] args) {
@@ -15,7 +15,6 @@ public class tictac {
 	public static void resetgame() {// resets the game to start values
 		for (int k = 0; k < 9; k++) {
 			grid[k] = 0;
-			win = false;
 		}
 	}
 
@@ -72,7 +71,6 @@ public class tictac {
 			fillToWin = 6;
 			pcchoose();
 		} else { // if neither PC or player can win, PC chooses randomly
-			System.out.println("PC setzt!");
 			do {
 				fieldPC = (int) (Math.round((Math.random() * 8)));
 			} while (grid[fieldPC] != 0);
@@ -80,7 +78,7 @@ public class tictac {
 		grid[fieldPC] = 1;
 	}
 
-	public static void wincheck() {
+	public static boolean wincheck() {
 		for (int i = 0; i < 2; i++) { // x=1 : checks if PC has won, x=3 :checks if Player has won
 			int winInt = i * 2 + 1;
 			if ((grid[0] == winInt && grid[1] == winInt && grid[2] == winInt)
@@ -91,15 +89,10 @@ public class tictac {
 					|| (grid[2] == winInt && grid[5] == winInt && grid[8] == winInt)
 					|| (grid[0] == winInt && grid[4] == winInt && grid[8] == winInt)
 					|| (grid[2] == winInt && grid[4] == winInt && grid[6] == winInt)) {
-				if (winInt == 1) {
-					System.out.println("PC hat gewonnen!!!");
-					win = true;
-				} else {
-					System.out.println("Spieler hat gewonnen!!!");
-					win = true;
-				}
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public static void gridcreate() { // creates the grid, blanks if unused, X for PC, O for Player/User
@@ -128,7 +121,7 @@ public class tictac {
 			System.out.println("Eingabe nicht erkannt!");
 		}
 		inputPlayer = in.nextInt();
-		
+
 		if (inputPlayer == 1) { // player starts
 			pcOrPlayer = true;
 			System.out.println("PC beginnt!");
@@ -145,11 +138,11 @@ public class tictac {
 				System.out.println("Spieler beginnt!");
 			}
 		}
-		gridcreate();
 		for (int i = 0; i < 9; i++) { // repeats the game max. 9 times
 			if (pcOrPlayer == true) {
 				fillToWin = 2; // the sum of fields has to be 2 that the PC can fill the missing one to win
 				pcchoose();
+				System.out.println("PC setzt!");
 				pcOrPlayer = false;
 			} else {
 				System.out.println("Welches Feld möchtest du wählen?(0-8)");
@@ -167,11 +160,16 @@ public class tictac {
 				pcOrPlayer = true;
 			}
 			gridcreate();
-			wincheck();
-			if (win == true) {
+			boolean haswon = wincheck();
+			if (haswon == true) {
+				if (pcOrPlayer == false) {
+					System.out.println("Der Pc hat gewonnen!");
+				} else {
+					System.out.println("Der Spieler hat gewonnen!");
+				}
 				break;
 			}
-			if (i == 8 && win == false) { // checks if all fields are used but nobody has won
+			if (i == 8 && haswon == false) { // checks if all fields are used but nobody has won
 				System.out.println("Unentschieden!");
 				break;
 			}
