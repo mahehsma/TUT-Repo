@@ -26,7 +26,7 @@ public class TravellingMain {
 				}
 				System.out.println("Beste Optimierung bei " + intInputUser + " durchläufen: ");
 				System.out.print("Start --> ");
-				for (int i = 1; i < 11; i++) {
+				for (int i = 1; i < 11; i++) { //output town order
 					System.out.print("Stadt " + (townOrderOld[i]) + " --> ");
 				}
 				System.out.print("Start\nErgibt eine Strecke von: " + distanceNew);
@@ -45,7 +45,7 @@ public class TravellingMain {
 				System.out.println("Eingabe nicht erkannt!");
 			}
 			if (in.nextInt() == 1) {
-				distanceOld = (-1);
+				distanceOld = (-1); // for resetting the process
 			} else {
 				townAgain = false;
 			}
@@ -74,7 +74,7 @@ public class TravellingMain {
 		distanceOld = distanceOld + Math.sqrt(Math.pow((townX[townOrderOld[0]] - townX[townOrderOld[9]]), 2)
 				+ Math.pow((townY[townOrderOld[0]] - townY[townOrderOld[10]]), 2));
 		System.out.println(
-				"Die Distanz vom Start --> Stadt 1 --> Stadt 2... --> Stadt 10 zum Start beträgt: " + distanceOld);
+				"\nDie Distanz vom Start --> Stadt 1 --> Stadt 2... --> Stadt 10 zum Start beträgt: " + distanceOld);
 		// mapDraw();
 	}
 
@@ -112,8 +112,8 @@ public class TravellingMain {
 	public static double optimizeOrder() {
 		double distanceNew = 0;
 		int townOrderNew[] = new int[11];
-		int switchTownA = (int) (Math.random() * 11);
-		int switchTownB = (int) (Math.random() * 11);
+		int switchTownA = (int) (Math.random() * 11); 	//random position A gets switched with
+		int switchTownB = (int) (Math.random() * 11);	//random position B
 		for (int i = 0; i < 11; i++) {
 			townOrderNew[i] = townOrderOld[i]; //
 		}
@@ -145,7 +145,7 @@ public class TravellingMain {
 			}
 			townOrderOld[10] = helpStart;
 		}
-		return distanceOld;
+		return distanceOld;					// returns the shorter distance
 
 	}
 }
