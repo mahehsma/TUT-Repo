@@ -9,81 +9,66 @@ public class stackMain {
 		int pointer = 0;
 		boolean repeatStack = true;
 		do {
-			int bracket1 = 0;
-			int bracket2 = 0;
-			int bracket3 = 0;
 			boolean wrongInput = false;
 			System.out.println("String eingeben!");
 			String inputUser = in.next();
-			char searchingFor = ' ';
 			for (int i = 0; i < inputUser.length(); i++) {
 				pointer = i;
 				stack[i] = push(inputUser.charAt(i), pointer);
 			}
 			char charAtPosPointer;
+			char stackBracket[] = new char[inputUser.length()];
+			int pointerBracket = -1;
 			for (int i = pointer; i >= 0; i--) {
 				charAtPosPointer = pull(stack, i);
-//				if (searchingFor == ' ') {
-//					switch (charAtPosPointer) {
-//					case ')':
-//						searchingFor = '(';
-//						bracket1++;
-//						break;
-//					case '}':
-//						searchingFor = '{';
-//						bracket2++;
-//						break;
-//					case ']':
-//						searchingFor = '[';
-//						bracket3++;
-//						break;
-//					case '(':
-//						wrongInput = true;
-//						break;
-//					case '[':
-//						wrongInput = true;
-//						break;
-//					case '{':
-//						wrongInput = true;
-//						break;
-//					}
-//
-//				} else {
-//					switch (charAtPosPointer) {
-//					case '(':
-//						if (searchingFor == '(') {
-//							searchingFor = ' ';
-//							stack[i] = ' ';
-//							bracket1--;
-//						} else {
-//							wrongInput = true;
-//						}
-//						break;
-//					case '{':
-//						if (searchingFor == '{') {
-//							searchingFor = ' ';
-//							stack[i] = ' ';
-//							bracket2--;
-//						} else {
-//							wrongInput = true;
-//						}
-//						break;
-//					case '[':
-//						if (searchingFor == '[') {
-//							searchingFor = ' ';
-//							stack[i] = ' ';
-//							bracket3--;
-//						} else {
-//							wrongInput = true;
-//						}
-//						break;
-//					}
-//				}
-				if (wrongInput == true || (i == 0 && searchingFor != ' ')) {
+
+				switch (charAtPosPointer) {
+				case ')':
+					pointerBracket++;
+					stackBracket[pointerBracket] = ')';
+					break;
+				case ']':
+					pointerBracket++;
+					stackBracket[pointerBracket] = ']';
+					break;
+				case '}':
+					pointerBracket++;
+					stackBracket[pointerBracket] = '}';
+					break;
+				case '(':
+					if (pointerBracket != -1) {
+						if (stackBracket[pointerBracket] == ')') {
+							pointerBracket--;
+						}
+					} else {
+						wrongInput = true;
+					}
+					break;
+				case '[':
+					if (pointerBracket != -1) {
+						if (stackBracket[pointerBracket] == ']') {
+							pointerBracket--;
+						}
+					} else {
+						wrongInput = true;
+					}
+					break;
+				case '{':
+					if (pointerBracket != -1) {
+						if (stackBracket[pointerBracket] == '}') {
+							pointerBracket--;
+						}
+					} else {
+						wrongInput = true;
+					}
+					break;
+				}
+				if (i == 0 && pointerBracket == -1) {
+					System.out.println("Korrekte Eingabe!");
+				} else if (wrongInput == true || (i == 0 && pointerBracket != -1)) {
 					System.out.println("Falsche Eingabe!!!");
 					break;
-				} else if (i == 0) {
-					System.out.println("Korrekte Eingabe!");
+
 				}
 			}
 
