@@ -1,8 +1,6 @@
 import java.util.*;
 
 public class stackMain {
-	public static char stack[] = new char[1];
-	public static int pointer;
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
@@ -13,66 +11,57 @@ public class stackMain {
 			boolean wrongInput = false;
 			System.out.println("String eingeben!");
 			String inputUser = in.next();
-			pointer = 0;
-			for (int i = inputUser.length() - 1; i >= 0; i--) {
+			for (int i = 0; i < inputUser.length(); i++) {
 
 				switch (inputUser.charAt(i)) {
-				case ')':
-					dArray.set(pointer, inputUser.charAt(i));
-					pointer++;
-					break;
-				case ']':
-					dArray.set(pointer, inputUser.charAt(i));
-					pointer++;
-					break;
-				case '}':
-					dArray.set(pointer, inputUser.charAt(i));
-					pointer++;
-					break;
 				case '(':
-					if (pointer != 0) {
-						if (dArray.get(pointer - 1) == ')') {
-							dArray.set(pointer - 1, ' ');
-							pointer--;
-							break;
-						}
-					}
-					wrongInput = true;
+					dArray.set('('); // pushes "("
 					break;
 				case '[':
-					if (pointer != 0) {
-						if (dArray.get(pointer - 1) == ']') {
-							dArray.set(pointer - 1, ' ');
-							pointer--;
+					dArray.set('['); // pushes "["
+					break;
+				case '{':
+					dArray.set('{'); // pushes "{"
+					break;
+				case ')':
+					if (dArray.isEmpty == false) {
+						if (dArray.get() == '(') { // checks if last item on the stack is "("
 							break;
 						}
 					}
 					wrongInput = true;
 					break;
-				case '{':
-					if (pointer != 0) {
-						if (dArray.get(pointer - 1) == '}') {
-							dArray.set(pointer - 1, ' ');
-							pointer--;
+				case ']':
+					if (dArray.isEmpty == false) {
+						if (dArray.get() == '[') { // checks if last item on the stack is "["
+							break;
+						}
+					}
+					wrongInput = true;
+					break;
+				case '}':
+					if (dArray.isEmpty == false) {
+						if (dArray.get() == '{') { // checks if last item on the stack is "{"
 							break;
 						}
 					}
 					wrongInput = true;
 					break;
 				}
-				if (wrongInput == true || (i == 0 && pointer != 0)) {
+				if (wrongInput == true || (i == (inputUser.length() - 1) && dArray.isEmpty == false)) {
 					System.out.println("Falsche Eingabe!!!");
 					break;
 
-				} else if (i == 0 && pointer == 0) {
+				} else if (i == (inputUser.length() - 1) && dArray.isEmpty == true) {
 					System.out.println("Korrekte Eingabe!");
 				}
 			}
 			System.out.println("\nNochmal\n (1) Ja\n (2) Nein");
-			if (in.nextInt() == 2) {
+			if (in.nextInt() == 2) { // ends program if user wants so
 				repeatStack = false;
 			}
-		} while (repeatStack == true);
+		} while (repeatStack == true); // let the user rerun the program
+		System.out.println("Bis zum nächsten Mal!");
 	}
 
 }

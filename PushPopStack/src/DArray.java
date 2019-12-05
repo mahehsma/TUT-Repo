@@ -1,30 +1,38 @@
 
 public class DArray {
-	char[] charArray;
-	int size;
+	private char[] charArray;
+	private int size;
+	private int pointer=0;
+	boolean isEmpty=true;
 
-	DArray(int s) {
+	DArray(int s) { //constructor creates array (length 10)
 		this.size = s;
 		charArray = new char[size];
 	}
 
-	void set(int pos, char ch) {
-		if (pos > size) {
-			char[] helpArray = new char[pos + 10];
+	void set(char ch) {
+		if (pointer >= size) { //checks if the stack size is too small
+			char[] helpArray = new char[pointer + 10]; //increases stack size by 10
 			for (int i = 0; i < size; i++) {
 				helpArray[i] = charArray[i];
 			}
-			size = pos + 10;
+			size = pointer + 10;
 			charArray = helpArray;
 		}
-		charArray[pos] = ch;
+		charArray[pointer] = ch; //pushes input (ch) at the position of pointer
+		pointer++;
+		isEmpty=false;
 	}
 
-	char get(int pos) {
-		if (pos >= size || pos < 0 || charArray[pos] == ' ') {
+	char get() {
+		pointer--;
+		if (pointer==0) {
+			isEmpty=true;
+		}
+		if (pointer < 0 ) {
 			return '0';
 		} else {
-			return charArray[pos];
+			return charArray[pointer];
 		}
 
 	}
