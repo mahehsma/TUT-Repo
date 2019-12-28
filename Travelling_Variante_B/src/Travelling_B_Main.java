@@ -18,7 +18,7 @@ public class Travelling_B_Main {
 				System.out.println("Wie oft soll optimiert werden?");
 				int optimizations = in.nextInt();
 				int testTownOrder[] = new int[10];
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 10; i++) { //first route (0,1,2,3,4,5,6,7,8,9,0)
 					testTownOrder[i] = townOrder[i];
 				}
 				for (int i = 0; i < optimizations; i++) {
@@ -50,21 +50,16 @@ public class Travelling_B_Main {
 		// creates the distances between the towns
 
 		int distances[][] = new int[10][10];
+
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				distances[i][j] = -1;
+				distances[i][j] = distances[j][i] =  (int) (1 + 99 * Math.random());
 			}
+			distances[i][i] = 0; // distance town n to town n = 0
 		}
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (i == j) {
-					distances[i][j] = 0; // distance town n to town n = 0
-				} else if (distances[j][i] != -1) {
-					distances[i][j] = distances[j][i]; // mirrors: town A-->B = B-->A
-				} else {
-					distances[i][j] = (int) (1 + 99 * Math.random());
-				}
-				System.out.print(distances[i][j] + "	");
+			System.out.print(distances[i][j]+"	");
 			}
 			System.out.println("");
 		}
