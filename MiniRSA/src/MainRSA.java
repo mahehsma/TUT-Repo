@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class MainRSA {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println("Welcome to miniRSA!");
 		do {
 			System.out.println("---Press '1' for encryption, '2' for decryption or '3' for exit!---");
